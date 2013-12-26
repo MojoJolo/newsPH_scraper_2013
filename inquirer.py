@@ -3,9 +3,11 @@ from bs4 import BeautifulSoup
 
 next_flag = True
 
-soup = BeautifulSoup(urllib2.urlopen('http://newsinfo.inquirer.net/category/latest-stories/page/2'))
+n = 1
 
 while next_flag:
+  soup = BeautifulSoup(urllib2.urlopen('http://newsinfo.inquirer.net/category/latest-stories/page/%d' % n))
+
   for link in soup.find_all('div', class_='post'):
     month = link.find('p', class_='metas').contents[0].split()[1]
     year = link.find('p', class_='metas').contents[0].split()[3]
@@ -15,6 +17,4 @@ while next_flag:
     else:
       next_flag = False
 
-  for nav in soup.find('div', class_='navigation').find_all('a'):
-    if "Next Page" in nav.contents[0]:
-      soup = BeautifulSoup(urllib2.urlopen(nav.get('href')))
+  n += 1
