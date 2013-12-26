@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 next_flag = True
 
-soup = BeautifulSoup(urllib2.urlopen('http://newsinfo.inquirer.net/category/latest-stories/page/2').read())
+soup = BeautifulSoup(urllib2.urlopen('http://newsinfo.inquirer.net/category/latest-stories/page/2'))
 
 while next_flag:
   for link in soup.find_all('div', class_='post'):
@@ -12,10 +12,9 @@ while next_flag:
     
     if year == "2013":
       print "%s, %s" % (month, link.h1.a.get('href'))
+    else:
+      next_flag = False
 
   for nav in soup.find('div', class_='navigation').find_all('a'):
     if "Next Page" in nav.contents[0]:
       soup = BeautifulSoup(urllib2.urlopen(nav.get('href')))
-      next_flag = True
-    else:
-      next_flag = False
