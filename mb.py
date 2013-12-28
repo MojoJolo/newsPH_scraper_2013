@@ -15,7 +15,10 @@ while next_flag:
     link = post.p.a.get('href')
 
     if year == "2013":
-      print "%s, %s" % (month, link)
+      try:
+        print "%s, %s" % (month, link)
+      except Exception as ex:
+        pass
     else:
       next_flag = False
 

@@ -19,4 +19,8 @@ dist
 _mailinglist
 .tox
 
-*.csv
+senti
+senti2
+senti3
+readborg_senti2
+readborg_senti3
